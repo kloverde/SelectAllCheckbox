@@ -1,7 +1,7 @@
 SelectAllCheckbox
 =================
 
-See LICENSE for this software's licensing information.
+See LICENSE for this software's licensing terms.
 
 SelectAllCheckbox is a jQuery plugin which makes it easy to create "select all"
 checkboxes for checkbox groups.
