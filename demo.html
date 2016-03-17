@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!--
+   SelectAllCheckbox
+   https://www.github.com/kloverde/jQuerySelectAllCheckbox
+
+   Copyright (c) 2016 Kurtis LoVerde
+   All rights reserved
+-->
+
+<html lang="en-US">
+   <head>
+      <meta charset="UTF-8"/>
+
+      <title>SelectAllCheckbox Demo</title>
+
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+      <script type="text/javascript" src="jquery.selectallcheckbox.js"></script>
+
+      <script type="text/javascript">
+         function onSelectAll( checkbox, checkedState ) {
+            var html = (checkedState === "none" ? "Deselected" : "Selected")
+                     + " all with " + $(checkbox).attr( "id" );
+
+            $( "#log" ).html( html );
+         }
+
+         function onSelectCheckbox( checkbox, checkedState ) {
+            var html = "<p>Clicked " + $( checkbox ).attr( "id" )
+                     + "</p><p>Checked state of group is: "
+                     + checkedState + "</p>";
+
+            $( "#log" ).html( html );
+         }
+
+         $( document ).ready( function() {
+        	   $( "#selectAllGroup1" ).selectAllCheckbox(
+        	         {
+        	            "checkboxesName"    : "group1",
+        	            "selectAllCallback" : onSelectAll,
+        	            "selectCallback"    : onSelectCheckbox
+        	         }
+        	   );
+
+            $( "#selectAllGroup2" ).selectAllCheckbox(
+                  {
+                     "checkboxesName"    : "group2",
+                     "selectAllCallback" : onSelectAll,
+                     "selectCallback"    : onSelectCheckbox,
+                     useIndeterminate    : false
+                  }
+            );
+         });
+      </script>
+
+      <style type="text/css">
+         label {
+            display: block;
+         }
+
+         .selectAllLabel {
+            font-size: larger;
+            font-weight: bold;
+         }
+
+         #container {
+            min-height: 150px;
+         }
+
+         #container, #checkboxes, #log {
+            display: table-cell;
+            min-width: 200px;
+            vertical-align: middle;
+            padding: 10px;
+         }
+
+         #checkboxes, #log {
+            border: 1px solid #000000;
+         }
+      </style>
+   </head>
+
+   <body>
+      <form name="myForm">
+         <div id="container">
+            <div id="checkboxes">
+               <h3>Group 1</h3>
+
+               <label class="selectAllLabel">
+                  <input class="selectAllBox" type="checkbox" id="selectAllGroup1"/>
+                  Select All
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group1_a" name="group1" value="1a"/>
+                  Choice A
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group1_b" name="group1" value="1b"/>
+                  Choice B
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group1_c" name="group1" value="1c"/>
+                  Choice C
+               </label>
+
+               <h3>Group 2</h3>
+
+               <label class="selectAllLabel">
+                  <input class="selectAllBox" type="checkbox" id="selectAllGroup2"/>
+                  Select All
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group2_a" name="group2" value="2a"/>
+                  Choice A
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group2_b" name="group2" value="2b"/>
+                  Choice B
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group2_c" name="group2" value="2c"/>
+                  Choice C
+               </label>
+            </div>
+
+            <div id="log">
+               Click something
+            </div>
+         </div>
+	   </form>
+   </body>
+</html>
