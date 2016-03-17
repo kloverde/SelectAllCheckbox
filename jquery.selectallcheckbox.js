@@ -2,6 +2,8 @@
  * SelectAllCheckbox
  * https://www.github.com/kloverde/SelectAllCheckbox
  *
+ * This software is licensed under the 3-clause BSD license.
+ *
  * Copyright (c) 2016 Kurtis LoVerde
  * All rights reserved
  */
