@@ -2,7 +2,7 @@
 
 <!--
    SelectAllCheckbox
-   https://www.github.com/kloverde/jQuerySelectAllCheckbox
+   https://www.github.com/kloverde/SelectAllCheckbox
 
    Copyright (c) 2016 Kurtis LoVerde
    All rights reserved
@@ -20,7 +20,7 @@
       <script type="text/javascript">
          function onSelectAll( checkbox, checkedState ) {
             var html = (checkedState === "none" ? "Deselected" : "Selected")
-                     + " all with " + $(checkbox).attr( "id" );
+                     + " all with " + $( checkbox ).attr( "id" );
 
             $( "#log" ).html( html );
          }
@@ -34,22 +34,18 @@
          }
 
          $( document ).ready( function() {
-            $( "#selectAllGroup1" ).selectAllCheckbox(
-               {
-                  "checkboxesName"    : "group1",
-                  "selectAllCallback" : onSelectAll,
-                  "selectCallback"    : onSelectCheckbox
-               }
-         );
+            $( "#selectAllGroup1" ).selectAllCheckbox( {
+               checkboxesName    : "group1",
+               selectAllCallback : onSelectAll,
+               selectCallback    : onSelectCheckbox
+            });
 
-            $( "#selectAllGroup2" ).selectAllCheckbox(
-                  {
-                     "checkboxesName"    : "group2",
-                     "selectAllCallback" : onSelectAll,
-                     "selectCallback"    : onSelectCheckbox,
-                     useIndeterminate    : false
-                  }
-            );
+            $( "#selectAllGroup2" ).selectAllCheckbox( {
+               checkboxesName    : "group2",
+               selectAllCallback : onSelectAll,
+               selectCallback    : onSelectCheckbox,
+               useIndeterminate  : false
+            });
          });
       </script>
 
@@ -87,7 +83,7 @@
                <h3>Group 1</h3>
 
                <label class="selectAllLabel">
-                  <input class="selectAllBox" type="checkbox" id="selectAllGroup1"/>
+                  <input type="checkbox" id="selectAllGroup1"/>
                   Select All
                </label>
 
@@ -109,7 +105,7 @@
                <h3>Group 2</h3>
 
                <label class="selectAllLabel">
-                  <input class="selectAllBox" type="checkbox" id="selectAllGroup2"/>
+                  <input type="checkbox" id="selectAllGroup2"/>
                   Select All
                </label>
 

@@ -9,10 +9,10 @@
 (function( $ ) {
    $.fn.selectAllCheckbox = function( options ) {
       var settings = $.extend( {
-         checkboxesName     : "checkboxes",
-         useIndeterminate   : true,
-         selectAllCallback  : null,
-         selectCallback     : null
+         checkboxesName    : "checkboxes",
+         useIndeterminate  : true,
+         selectAllCallback : null,
+         selectCallback    : null
       }, options );
 
       var checkboxesSelector = "input[type='checkbox'][name='" + settings.checkboxesName + "']";
@@ -23,7 +23,7 @@
             $( this ).prop( "checked", $(allBox).prop("checked") );
          });
 
-         if( typeof settings.selectAllCallback != undefined && typeof settings.selectAllCallback === "function" ) {
+         if( typeof settings.selectAllCallback === "function" ) {
             settings.selectAllCallback( this, $(allBox).prop("checked") ? "all" : "none" );
          }
       });
@@ -53,7 +53,7 @@
 
             setParentCheckboxState( status );
 
-            if( typeof settings.selectCallback != undefined && typeof settings.selectCallback === "function" ) {
+            if( typeof settings.selectCallback === "function" ) {
                settings.selectCallback( this, status );
             }
          });
