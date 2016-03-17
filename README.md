@@ -18,7 +18,17 @@ checkboxes for checkbox groups.
 
 ## Using
 
-Invoke the plugin on the select-all checkbox.  In the configuration, supply the name of your checkbox group (the "name" attribute in your HTML), and the callbacks you want to execute, if any.
+Invoke the plugin on the select-all checkbox.  You can pass up to four settings:
+
+| Property          | Description                                                                                                                 |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `checkboxesName`    | The name of the checkbox group to bind the select-all checkbox to.  This is the "name" attribute in your HTML.  The default value is "checkboxes".            |
+| `selectAllCallback` | A callback to execute when the select-all checkbox is clicked.  There is no default value.                                                            |
+| `selectCallback`    | A callback to execute when one of the checkboxes (other than select-all) is clicked.  There is no default value.                                         |
+| `useIndeterminate`  | A boolean which determines whether the select-all checkbox can be partially checked when only a subset of checkboxes are checked.  The default value is `true`.|  
+
+
+
 
 ```javascript
 
