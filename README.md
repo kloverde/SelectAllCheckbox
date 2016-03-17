@@ -34,6 +34,9 @@ The callback functions receive two arguments:
 2.  A string representing the state of the checkbox group.  Values are `some`, `all` and `none` (note:  `some` is not possible for the select-all callback)
 
 
+###Example:
+
+
 ```javascript
 
 $( "#selectAllCheckbox" ).selectAllCheckbox( {
