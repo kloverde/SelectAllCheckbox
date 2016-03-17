@@ -25,7 +25,7 @@ Invoke the plugin on the select-all checkbox.  In the configuration, supply the 
 $( "#selectAllCheckbox" ).selectAllCheckbox(
       {
          "checkboxesName"    : "checkboxes",
-         "selectAllCallback" : function() { alert("wee!"); },
+         "selectAllCallback" : function( checkbox, checkedState ) { stuff },
          "selectCallback"    : functionName
       }
 );
@@ -37,4 +37,4 @@ See the included HTML file for a complete demo.
 
 ## Thanks
 
-Do you like this library?  Want to toss a few bucks my way to say thanks?  I accept donations at https://paypal.me/KurtisLoVerde/5.  Or, a simple e-mail saying thanks works just as well (github@loverde.org).  Happy coding!
+Do you like this library?  Want to toss a few bucks my way to say thanks?  I accept donations at https://paypal.me/KurtisLoVerde/5.  Or, a simple e-mail saying thanks works just as well (I can be reached at github@loverde.org).  Happy coding!
