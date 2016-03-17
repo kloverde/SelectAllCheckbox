@@ -31,7 +31,7 @@ Invoke the plugin on the select-all checkbox.  There are four settings, all of w
 The callback functions receive two arguments:
 
 1.  The clicked checkbox, as an object 
-2.  A string representing the state of the checkbox group.  Values are `some`, `all` and `none` (note:  `some` is not possible for the select-all callback)
+2.  A string representing how many checkboxes in the group are checked.  Values are `some`, `all` and `none` (note:  `some` is not returned for the select-all callback)
 
 
 #### Example
