@@ -40,7 +40,7 @@ The callback functions receive two arguments:
 ```javascript
 
 $( "#selectAllCheckbox" ).selectAllCheckbox( {
-   checkboxesName    : "checkboxes",
+   checkboxesName    : "theCheckboxes",
    selectAllCallback : function( checkbox, checkedState ) { stuff },
    selectCallback    : functionName
 });
