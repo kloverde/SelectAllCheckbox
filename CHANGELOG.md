@@ -1,3 +1,2 @@
-## Release 1.0 (March 18, 2016)
+## Release 1.0 (UNRELEASED - in development)
 
-* First release
