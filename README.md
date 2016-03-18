@@ -5,6 +5,7 @@ See LICENSE for this software's licensing terms.
 
 SelectAllCheckbox is a jQuery plugin which makes it easy to create "select all" checkboxes for checkbox groups.
 
+
 ## Features
 
 * Select/deselect all checkboxes in a group via a select-all checkbox which you designate
