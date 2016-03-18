@@ -20,18 +20,18 @@
       var checkboxesSelector = "input[type='checkbox'][name='" + settings.checkboxesName + "']";
       var allBox = this;
 
-      $( this ).click( function() {
+      allBox.click( function() {
          $( checkboxesSelector ).each( function() {
-            $( this ).prop( "checked", $(allBox).prop("checked") );
-         });
+            $( this ).prop( "checked", allBox.prop("checked") );
+         } );
 
          if( typeof settings.selectAllCallback === "function" ) {
-            settings.selectAllCallback( this, $(allBox).prop("checked") ? "all" : "none" );
+            settings.selectAllCallback( allBox, allBox.prop("checked") ? "all" : "none" );
          }
-      });
+      } );
 
       $( checkboxesSelector ).each( function() { 
-         $(this).click( function() {
+         $( this ).click( function() {
             var someChecked    = false,
                 someNotChecked = false;
 
@@ -43,7 +43,7 @@
                } else {
                   someNotChecked = true;
                }
-            });
+            } );
 
             if( someChecked && someNotChecked ) {
                status = "some";
@@ -58,22 +58,22 @@
             if( typeof settings.selectCallback === "function" ) {
                settings.selectCallback( this, status );
             }
-         });
-      });
+         } );
+      } );
 
       function setParentCheckboxState( status ) {
          if( status === "some" ) {
-            $( allBox ).prop( "checked", false );
+            allBox.prop( "checked", false );
 
             if( settings.useIndeterminate ) {
-               $( allBox ).prop( "indeterminate", true );
+               allBox.prop( "indeterminate", true );
             }
          } else if( status === "all" ) {
-            $( allBox ).prop( "indeterminate", false );
-            $( allBox ).prop( "checked", true );
+            allBox.prop( "indeterminate", false );
+            allBox.prop( "checked", true );
          } else if( status === "none" ) {
-            $( allBox ).prop( "indeterminate", false );
-            $( allBox ).prop( "checked", false );
+            allBox.prop( "indeterminate", false );
+            allBox.prop( "checked", false );
          }
       }
 
