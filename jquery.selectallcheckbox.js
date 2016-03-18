@@ -77,6 +77,6 @@
          }
       }
 
-      return this;
+      return allBox;
    };
 }( jQuery ));
