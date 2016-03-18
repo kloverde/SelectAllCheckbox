@@ -31,7 +31,9 @@
       } );
 
       $( checkboxesSelector ).each( function() { 
-         $( this ).click( function() {
+         var box = $( this );
+
+         box.click( function() {
             var someChecked    = false,
                 someNotChecked = false;
 
@@ -56,7 +58,7 @@
             setParentCheckboxState( status );
 
             if( typeof settings.selectCallback === "function" ) {
-               settings.selectCallback( this, status );
+               settings.selectCallback( box, status );
             }
          } );
       } );

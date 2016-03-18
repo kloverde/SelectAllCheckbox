@@ -20,15 +20,15 @@
       <script type="text/javascript">
          function onSelectAll( checkbox, checkedState ) {
             var html = (checkedState === "none" ? "Deselected" : "Selected")
-                     + " all with " + $( checkbox ).attr( "id" );
+                     + " all with " + checkbox.attr( "id" );
 
             $( "#log" ).html( html );
          }
 
          function onSelectCheckbox( checkbox, checkedState ) {
             var html = "<p>"
-                     + ( $(checkbox).prop("checked") ? "Selected " : "Deselected " )
-                     + $( checkbox ).attr( "id" )
+                     + ( checkbox.prop("checked") ? "Selected " : "Deselected " )
+                     + checkbox.attr( "id" )
                      + "</p><p>Checked state of group is: "
                      + checkedState + "</p>";
 
