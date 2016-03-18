@@ -22,10 +22,10 @@ Invoke the plugin on the select-all checkbox.  There are four settings, all of w
 
 | Property          | Description  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `checkboxesName`    | The name of the checkbox group to bind the select-all checkbox to.  This is the "name" attribute in your HTML.  The default value is "checkboxes".  My guess is that you'll probably want to override this to be something more descriptive; also, if you have more than one select-all checkbox group, then you must provide a value. |
+| `checkboxesName`     | The name of the checkbox group to bind the select-all checkbox to.  This is the "name" attribute in your HTML.  The default value is "checkboxes".  My guess is that you'll probably want to override this to be something more descriptive; also, if you have more than one select-all checkbox group, then you must provide a value. |
 | `selectAllCallback` | A callback to execute when the group's select-all checkbox is clicked.  There is no default value. |
-| `selectCallback`    | A callback to execute when one of the checkboxes in the group (other than select-all) is clicked.  There is no default value. |
-| `useIndeterminate`  | A boolean which determines whether the select-all checkbox displays as partially checked when only a subset of checkboxes are checked.  The default value is `true`. |
+| `selectCallback`     | A callback to execute when one of the checkboxes in the group (other than select-all) is clicked.  There is no default value. |
+| `useIndeterminate`   | A boolean which determines whether the select-all checkbox displays as partially checked when only a subset of checkboxes are checked.  The default value is `true`. |
 
 
 The callback functions receive two arguments:
