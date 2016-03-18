@@ -39,7 +39,7 @@ The callback functions receive two arguments:
 
 ```javascript
 
-$( "#selectAllCheckbox" ).selectAllCheckbox( {
+$( "#selectAll" ).selectAllCheckbox( {
    checkboxesName    : "theCheckboxes",
    selectAllCallback : function( checkbox, checkedState ) { stuff },
    selectCallback    : functionName
