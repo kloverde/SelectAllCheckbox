@@ -85,9 +85,7 @@
             setParentCheckboxState( status );
 
             if( typeof settings.onChangeCallback === "function" ) {
-               const changedBoxes = [1];
-               changedBoxes[0] = box;
-
+               const changedBoxes = [ box ];
                settings.onChangeCallback( changedBoxes, status );
             }
          } );
