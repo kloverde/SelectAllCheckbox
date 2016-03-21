@@ -11,36 +11,63 @@
 (function( $ ) {
    $.fn.selectAllCheckbox = function( options ) {
       var settings = $.extend( {
-         checkboxesName    : "checkboxes",
-         useIndeterminate  : true,
-         selectAllCallback : null,
-         selectCallback    : null
+         // The HTML "name" attribute of the checkbox group
+         checkboxesName : "checkboxes",
+
+         // A user-defined function to execute when a checkbox in the group changes state.
+         // The function must accept two arguments:  the first is an array of the changed
+         // checkboxes as jQuery objects.  The second argument is a string representing
+         // the checked state of the checkbox group:  possible values are "none", "some"
+         // and "all".  JQuery does not fire a change event when you change a checkbox's
+         // state via script.  If you want the callback to execute in that scenario (and
+         // you'll want it to if you're using indeterminate mode), you must trigger the
+         // change event manually with $("#id").trigger("change").
+         onChangeCallback : null,
+
+         // Controls whether the select-all checkbox displays as partially checked when a
+         // subset of checkboxes are checked
+         useIndeterminate : true
       }, options );
 
-      var checkboxesSelector = "input[type='checkbox'][name='" + settings.checkboxesName + "']";
-      var allBox = this;
+      const GROUP_STATE_NONE = "none",
+            GROUP_STATE_SOME = "some",
+            GROUP_STATE_ALL  = "all";
 
-      allBox.click( function() {
-         $( checkboxesSelector ).each( function() {
-            $( this ).prop( "checked", allBox.prop("checked") );
+      const CHECKBOX_GROUP_SELECTOR = "input[type='checkbox'][name='" + settings.checkboxesName + "']";
+      const PROP_CHECKED = "checked";
+
+      const allBox = this;
+
+      allBox.change( function() {
+         const isAllChecked = allBox.prop( PROP_CHECKED );
+         const changedBoxes = [];
+
+         $( CHECKBOX_GROUP_SELECTOR ).each( function() {
+            const jqueryThis = $( this );
+            const isThisChecked = jqueryThis.prop( PROP_CHECKED );
+
+            if( isThisChecked !== isAllChecked ) {
+               jqueryThis.prop( PROP_CHECKED, isAllChecked );
+               changedBoxes.push( jqueryThis );
+            }
          } );
 
-         if( typeof settings.selectAllCallback === "function" ) {
-            settings.selectAllCallback( allBox, allBox.prop("checked") ? "all" : "none" );
+         if( changedBoxes.length > 0 ) {
+            settings.onChangeCallback( changedBoxes, isAllChecked ? GROUP_STATE_ALL : GROUP_STATE_NONE );
          }
       } );
 
-      $( checkboxesSelector ).each( function() { 
+      $( CHECKBOX_GROUP_SELECTOR ).each( function() {
          var box = $( this );
 
-         box.click( function() {
+         box.change( function() {
             var someChecked    = false,
                 someNotChecked = false;
 
-            var status = "none";
+            var status = GROUP_STATE_NONE;
 
-            $( checkboxesSelector ).each( function() {
-               if( $(this).prop("checked") === true ) {
+            $( CHECKBOX_GROUP_SELECTOR ).each( function() {
+               if( $(this).prop(PROP_CHECKED) === true ) {
                   someChecked = true;
                } else {
                   someNotChecked = true;
@@ -48,34 +75,37 @@
             } );
 
             if( someChecked && someNotChecked ) {
-               status = "some";
+               status = GROUP_STATE_SOME;
             } else if( someChecked && !someNotChecked ) {
-               status = "all";
+               status = GROUP_STATE_ALL;
             } else if( !someChecked ) {
-               status = "none";
+               status = GROUP_STATE_NONE;
             }
 
             setParentCheckboxState( status );
 
-            if( typeof settings.selectCallback === "function" ) {
-               settings.selectCallback( box, status );
+            if( typeof settings.onChangeCallback === "function" ) {
+               const changedBoxes = [1];
+               changedBoxes[0] = box;
+
+               settings.onChangeCallback( changedBoxes, status );
             }
          } );
       } );
 
       function setParentCheckboxState( status ) {
          if( status === "some" ) {
-            allBox.prop( "checked", false );
+            allBox.prop( PROP_CHECKED, false );
 
             if( settings.useIndeterminate ) {
                allBox.prop( "indeterminate", true );
             }
          } else if( status === "all" ) {
             allBox.prop( "indeterminate", false );
-            allBox.prop( "checked", true );
+            allBox.prop( PROP_CHECKED, true );
          } else if( status === "none" ) {
             allBox.prop( "indeterminate", false );
-            allBox.prop( "checked", false );
+            allBox.prop( PROP_CHECKED, false );
          }
       }
 
