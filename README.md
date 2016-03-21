@@ -23,7 +23,7 @@ Invoke the plugin on the select-all checkbox.  There are three settings, all of 
 | Property | Description | Default Value |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------- |---------------|
 | `checkboxesName` | The name of the checkbox group to bind the select-all checkbox to.  This is the "name" attribute in your HTML.  If you have more than one select-all checkbox group, then you must provide a value. | "checkboxes" |
-| `onChangeCallback` | A callback to execute when a checkbox's state changes.  The plugin captures the `change` event and executes this function as its last action of the event handling.  If you want this function to fire after changing a checkbox's value via script, you must manually fire the `change` event (jQuery wonn't do it for you). | none |
+| `onChangeCallback` | A callback to execute when a checkbox's state changes.  The plugin captures the `change` event and executes this function as its last action of the event handling.  If you want this function to fire after changing a checkbox's value via script, you must manually fire the `change` event (jQuery won't do it for you). | none |
 | `useIndeterminate` | A boolean which determines whether the select-all checkbox displays as partially checked when only a subset of checkboxes are checked | true |
 
 
