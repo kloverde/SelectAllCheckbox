@@ -27,7 +27,7 @@ Invoke the plugin on the select-all checkbox.  There are three settings, all of 
 | `useIndeterminate` | A boolean which determines whether the select-all checkbox displays as partially checked when only a subset of checkboxes are checked | true |
 
 
-The callback functions receives two arguments:
+The callback function receives two arguments:
 
 1.  The affected checkboxes as an array of jQuery objects 
 2.  A string representing how many checkboxes in the group are checked.  Values are `none`, `some` and `all`.
