@@ -1,6 +1,3 @@
-# NOTICE:  If you just discovered this library, please note that the next release (branch 2.0) will contain breaking changes to the callback functionality.  See the 2.0 branch for more information.
-
-
 SelectAllCheckbox
 =================
 
