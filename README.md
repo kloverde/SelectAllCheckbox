@@ -12,8 +12,8 @@ SelectAllCheckbox is a jQuery plugin which makes it easy to create "select all" 
 * When checkboxes are individually checked/unchecked, the select-all checkbox's status updates accordingly between checked, indeterminate (partially checked) and checked
 * Indeterminate mode can be disabled via configuration if desired
 * Supports any number of checkbox groups
-* Configuration accepts a callback for the select-all checkbox and a callback for its children
-* The callback receives the changed checkbox as an array of jQuery objects, plus the status of the checkbox group (all/some/none checked)
+* Configuration accepts a callback which executes when one or more checkboxes changes state
+* The callback receives the changed checkbox(es) as an array of jQuery objects, plus the status of the checkbox group (all/some/none checked)
 
 
 ## Using
