@@ -40,7 +40,7 @@ The callback function receives two arguments:
 
 $( "#selectAll" ).selectAllCheckbox( {
    checkboxesName   : "theCheckboxes",
-   onChangeCallback : function( checkboxes, checkedState ) { stuff },
+   onChangeCallback : function( checkboxes, checkedState ) { stuff }
 } );
 
 ```
