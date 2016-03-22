@@ -18,10 +18,7 @@
          // The function must accept two arguments:  the first is an array of the changed
          // checkboxes as jQuery objects.  The second argument is a string representing
          // the checked state of the checkbox group:  possible values are "none", "some"
-         // and "all".  JQuery does not fire a change event when you change a checkbox's
-         // state via script.  If you want the callback to execute in that scenario (and
-         // you'll want it to if you're using indeterminate mode), you must trigger the
-         // change event manually with $("#id").trigger("change").
+         // and "all".
          onChangeCallback : null,
 
          // Controls whether the select-all checkbox displays as partially checked when a
@@ -38,6 +35,11 @@
 
       var allBox = this;
 
+      // The select-all checkbox's change handler:
+      // Selects or deselects all checkboxes and invokes the user-supplied callback.
+      // If you set a checkbox's state via script, you must trigger change() on the
+      // modified checkbox to ensure the select-all checkbox's state is updated.
+      // JQuery does not fire change() for you.
       allBox.change( function() {
          var isAllChecked = allBox.prop( PROP_CHECKED );
          var changedBoxes = [];
@@ -60,6 +62,11 @@
       $( CHECKBOX_GROUP_SELECTOR ).each( function() {
          var box = $( this );
 
+         // The checkbox change handler:
+         // Updates the select-all checkbox's state and invokes the user-supplied callback.
+         // If you set a checkbox's state via script, you must trigger change() on the
+         // modified checkbox to ensure the select-all checkbox's state is updated.
+         // JQuery does not fire change() for you.
          box.change( function() {
             var someChecked    = false,
                 someNotChecked = false;
@@ -82,7 +89,7 @@
                status = GROUP_STATE_NONE;
             }
 
-            setParentCheckboxState( status );
+            updateSelectAllCheckboxState( status );
 
             if( typeof settings.onChangeCallback === "function" ) {
                var changedBoxes = [ box ];
@@ -91,7 +98,11 @@
          } );
       } );
 
-      function setParentCheckboxState( status ) {
+      // Sets the select-all checkbox to checked, unchecked or partially checked.
+      // If you set a checkbox's state via script, you must trigger change() on the
+      // modified checkbox to ensure the select-all checkbox's state is updated.
+      // JQuery does not fire change() for you.
+      function updateSelectAllCheckboxState( status ) {
          if( status === "some" ) {
             allBox.prop( PROP_CHECKED, false );
 
