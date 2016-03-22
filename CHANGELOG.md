@@ -1,6 +1,6 @@
-## Release 2.0 (UPCOMING RELEASE)
+## Release 2.0 (March 22, 2016)
 
-This release contains the following breaking changes:
+This release contains the following breaking change:
 
 * The callbacks which existed in version 1.0 no longer exist, and have been replaced by
   a single new callback:  onChangeCallback.  As the name implies, this callback's
