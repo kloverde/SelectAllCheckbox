@@ -29,22 +29,22 @@
          useIndeterminate : true
       }, options );
 
-      const GROUP_STATE_NONE = "none",
-            GROUP_STATE_SOME = "some",
-            GROUP_STATE_ALL  = "all";
+      var GROUP_STATE_NONE = "none",
+          GROUP_STATE_SOME = "some",
+          GROUP_STATE_ALL  = "all";
 
-      const CHECKBOX_GROUP_SELECTOR = "input[type='checkbox'][name='" + settings.checkboxesName + "']";
-      const PROP_CHECKED = "checked";
+      var CHECKBOX_GROUP_SELECTOR = "input[type='checkbox'][name='" + settings.checkboxesName + "']";
+      var PROP_CHECKED = "checked";
 
-      const allBox = this;
+      var allBox = this;
 
       allBox.change( function() {
-         const isAllChecked = allBox.prop( PROP_CHECKED );
-         const changedBoxes = [];
+         var isAllChecked = allBox.prop( PROP_CHECKED );
+         var changedBoxes = [];
 
          $( CHECKBOX_GROUP_SELECTOR ).each( function() {
-            const jqueryThis = $( this );
-            const isThisChecked = jqueryThis.prop( PROP_CHECKED );
+            var jqueryThis = $( this );
+            var isThisChecked = jqueryThis.prop( PROP_CHECKED );
 
             if( isThisChecked !== isAllChecked ) {
                jqueryThis.prop( PROP_CHECKED, isAllChecked );
@@ -85,7 +85,7 @@
             setParentCheckboxState( status );
 
             if( typeof settings.onChangeCallback === "function" ) {
-               const changedBoxes = [ box ];
+               var changedBoxes = [ box ];
                settings.onChangeCallback( changedBoxes, status );
             }
          } );

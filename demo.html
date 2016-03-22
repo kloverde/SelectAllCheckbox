@@ -22,8 +22,8 @@
             var html = "<p>Changed:<br/>";
 
             for( var i = 0; i < checkboxes.length; i++ ) {
-               const box = checkboxes[i];
-               const line = box.attr( "id" ) + " : " + ( box.prop("checked") ? "checked" : "unchecked" ) + "<br/>";
+               var box = checkboxes[i];
+               var line = box.attr( "id" ) + " : " + ( box.prop("checked") ? "checked" : "unchecked" ) + "<br/>";
 
                html += line;
             }
@@ -51,7 +51,7 @@
             } );
 
             $( "#btnChangeByScript" ).click( function() {
-               const selector = "#group3_a";
+               var selector = "#group3_a";
 
                $( selector ).prop( "checked", !$(selector).prop("checked") );
                $( selector ).trigger( "change" );
