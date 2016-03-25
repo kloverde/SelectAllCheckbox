@@ -1,5 +1,5 @@
 /*
- * SelectAllCheckbox
+ * SelectAllCheckbox v2.0
  * https://www.github.com/kloverde/jquery-SelectAllCheckbox
  *
  * This software is licensed under the 3-clause BSD license.
