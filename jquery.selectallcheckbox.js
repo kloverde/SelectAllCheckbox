@@ -6,11 +6,16 @@
  *
  * Copyright (c) 2016 Kurtis LoVerde
  * All rights reserved
+ *
+ * Donations:  https://paypal.me/KurtisLoVerde/5
  */
 
 (function( $ ) {
+   "use strict";
+
    $.fn.selectAllCheckbox = function( options ) {
-      var settings = $.extend( {
+
+	   var settings = $.extend( {
          // The HTML "name" attribute of the checkbox group
          checkboxesName : "checkboxes",
 
