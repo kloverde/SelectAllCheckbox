@@ -1,3 +1,9 @@
+## Release 2.0.1 (August 31, 2016)
+
+* Fixed a bug where the 'select all' logic wasn't performing a check on the callback to
+  see if it existed before calling it
+
+
 ## Release 2.0 (March 22, 2016)
 
 This release contains the following breaking change:
