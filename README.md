@@ -1,5 +1,5 @@
-SelectAllCheckbox
-=================
+SelectAllCheckbox v2.0.1
+========================
 
 See LICENSE for this software's licensing terms.
 
