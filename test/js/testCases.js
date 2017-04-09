@@ -71,9 +71,14 @@ var testCases;
 
    testCases = [
       tc( "determinate noneDisabled_noneChecked", checkboxGroups["noneDisabled_noneChecked"], false, SelectAllState.NOT_CHECKED,
-          [ clickScript("selectAll", [1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
-            clickScript("selectAll", [1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
-      )
+          [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
+            clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
+      ),
+
+      tc( "indeterminate noneDisabled_noneChecked", checkboxGroups["noneDisabled_noneChecked"], true, SelectAllState.NOT_CHECKED,
+            [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
+              clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
+        )
    ];
 
    /**
