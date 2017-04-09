@@ -84,6 +84,17 @@
       console.log( msg );
    }
 
+   function validateCallback( expectedCallbackChanged, expectedCallbackGroupState ) {
+      var expectedCallbackChangedNotJqueryObjects = [];
+
+      for( var i = 0; i < affectedBoxes.length; i++ ) {
+         expectedCallbackChangedNotJqueryObjects.push( parseInt(affectedBoxes[i].prop("id").replace("box", "")) );
+      }
+
+      deepEqual( expectedCallbackChangedNotJqueryObjects, expectedCallbackChanged, "The affected boxes reported by the callback are " + expectedCallbackChanged );
+      equal( groupState, expectedCallbackGroupState, "The group state reported by the callback is '" + expectedCallbackGroupState + "'" );
+   }
+
    function validateSelectAll( expected, isInit ) {
       var selectAll = $( "#selectAll" );
 
@@ -128,6 +139,7 @@
             $( "#box" + click.whichBox ).click();
          }
 
+         validateCallback( click.expectedCallbackChanged, click.expectedCallbackGroupState );
          validateSelectAll( click.expectedSelectAllState, false );
          validateBoxStates( click.expectedBoxStates );
       }
