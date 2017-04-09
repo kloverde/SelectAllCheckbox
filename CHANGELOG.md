@@ -1,3 +1,13 @@
+# Release 2.1 (UPCOMING RELEASe)
+
+* The select-all checkbox no longer changes the state of disabled checkboxes
+
+* The select-all checkbox initializes to the proper state (checked, unchecked, indeterminate)
+  based on the state of the checkbox group when the plugin is initialized
+
+* Added unit tests
+
+
 ## Release 2.0.1 (August 31, 2016)
 
 * Fixed a bug where the 'select all' logic wasn't performing a check on the callback to

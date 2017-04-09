@@ -1,5 +1,7 @@
-SelectAllCheckbox v2.0.1
-========================
+SelectAllCheckbox v2.1 (UPCOMING RELEASE)
+======================
+
+# You've stumbled upon a development branch.  Have a look around if you'd like, but only use code that has been posted to the releases page.
 
 See LICENSE for this software's licensing terms.
 
@@ -8,9 +10,10 @@ SelectAllCheckbox is a jQuery plugin which makes it easy to create "select all" 
 
 ## Features
 
-* Select/deselect all checkboxes in a group via a select-all checkbox which you designate
+* Select/deselect-all checkboxes in a group via a select-all checkbox which you designate
 * When checkboxes are individually checked/unchecked, the select-all checkbox's status updates accordingly between checked, indeterminate (partially checked) and checked
 * Indeterminate mode can be disabled via configuration if desired
+* Select-all checkboxes do not modify the state of disabled checkboxes
 * Supports any number of checkbox groups
 * Configuration accepts a callback which executes when one or more checkboxes changes state
 * The callback receives the changed checkbox(es) as an array of jQuery objects, plus the status of the checkbox group (all/some/none checked)
@@ -45,7 +48,7 @@ $( "#selectAll" ).selectAllCheckbox( {
 
 ```
 
-See the included HTML file for a complete demo.
+See `demo/demo.html` file for a more thorough demo.
 
 If you change a checkbox's state via script (for example, with $("#id").prop("checked", true), you must manually fire the `change` event on the checkbox to ensure that the select-all checkbox's state is updated.  This is because jQuery's prop() does not trigger change().
 

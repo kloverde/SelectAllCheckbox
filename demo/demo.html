@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 
-<!--
-   SelectAllCheckbox v2.0.1
-   https://www.github.com/kloverde/jquery-SelectAllCheckbox
-
-   Donations:  https://paypal.me/KurtisLoVerde/5
-
-   Copyright (c) 2016, Kurtis LoVerde
-   All rights reserved.
-
-   Redistribution and use in source and binary forms, with or without
-   modification, are permitted provided that the following conditions are met:
-
-       1. Redistributions of source code must retain the above copyright
-          notice, this list of conditions and the following disclaimer.
-       2. Redistributions in binary form must reproduce the above copyright
-          notice, this list of conditions and the following disclaimer in the
-          documentation and/or other materials provided with the distribution.
-       3. Neither the name of the copyright holder nor the names of its
-          contributors may be used to endorse or promote products derived from
-          this software without specific prior written permission.
-
-   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
 <html lang="en-US">
    <head>
       <meta charset="UTF-8"/>
 
+      <!--
+         SelectAllCheckbox
+         https://www.github.com/kloverde/jquery-SelectAllCheckbox
+
+         Donations:  https://paypal.me/KurtisLoVerde/5
+
+         Copyright (c) 2016, Kurtis LoVerde
+         All rights reserved.
+
+         Redistribution and use in source and binary forms, with or without
+         modification, are permitted provided that the following conditions are met:
+
+             1. Redistributions of source code must retain the above copyright
+                notice, this list of conditions and the following disclaimer.
+             2. Redistributions in binary form must reproduce the above copyright
+                notice, this list of conditions and the following disclaimer in the
+                documentation and/or other materials provided with the distribution.
+             3. Neither the name of the copyright holder nor the names of its
+                contributors may be used to endorse or promote products derived from
+                this software without specific prior written permission.
+
+         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+         ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+         WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+         DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+         FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+         DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+         SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+         CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+         OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+         OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      -->
+
       <title>SelectAllCheckbox Demo</title>
 
       <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
-      <script type="text/javascript" src="jquery.selectallcheckbox.js"></script>
+      <script type="text/javascript" src="../src/jquery.selectallcheckbox.js"></script>
 
       <script type="text/javascript">
          function onChange( checkboxes, checkedState ) {
@@ -81,6 +81,11 @@
                $( selector ).prop( "checked", !$(selector).prop("checked") );
                $( selector ).trigger( "change" );
             } );
+
+            $( "#selectAllGroup4" ).selectAllCheckbox( {
+                checkboxesName   : "group4",
+                onChangeCallback : onChange
+            } );
          } );
       </script>
 
@@ -100,7 +105,7 @@
 
          #container, #checkboxes, #log {
             display: table-cell;
-            min-width: 250px;
+            min-width: 350px;
             vertical-align: middle;
             padding: 10px;
          }
@@ -182,6 +187,41 @@
                </label>
 
                <input type="button" id="btnChangeByScript" value="Change 'Choice A' box by script"/>
+
+               <h3>Group 4 (disabled checkboxes)</h3>
+
+               <p>
+                  The state of disabled checkboxes are unaffected by the select-all checkbox.
+                  Their default states, whether checked or unchecked, remain - and they
+                  contribute to the status of the overall checkbox group.  Note that the
+                  select-all checkbox never displays as unchecked - it's either checked or
+                  indeterminate.  This is because there is a disabled, checked checkbox.
+               </p>
+
+               <label class="selectAllLabel">
+                  <input type="checkbox" id="selectAllGroup4"/>
+                  Select All
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group4_a" name="group4" value="4a" checked="checked" disabled/>
+                  Choice A
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group4_b" name="group4" value="4b" disabled/>
+                  Choice B
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group4_c" name="group4" value="4c"/>
+                  Choice C
+               </label>
+
+               <label>
+                  <input type="checkbox" id="group4_d" name="group4" value="4d"/>
+                  Choice D
+               </label>
             </div>
 
             <div id="log">
@@ -191,7 +231,7 @@
       </form>
 
       <h2>Donations</h2>
-      Your support is greatly appreciated and it motivates me to release more open source software.<br/>
-      <a href="https://paypal.me/KurtisLoVerde/5" target="new">https://paypal.me/KurtisLoVerde/5</a>
+      <p><a href="https://paypal.me/KurtisLoVerde/5" target="new">https://paypal.me/KurtisLoVerde/5</a></p>
+      <p>Thank you for your support!</p>
    </body>
 </html>
