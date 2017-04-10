@@ -66,11 +66,21 @@
 
       // Create the rest of the checkboxes
       for( var i = 0; i < boxConfig.length; i++ ) {
-         $( "<input/>", {
+         var box = $( "<input/>", {
             type : "checkbox",
             id   : "box" + i,
             name : groupName
-         } ).appendTo( checkboxContainer );
+         } );
+
+         if( !boxConfig[i].enabled ) {
+            box.prop( "disabled", true );
+         }
+
+         if( boxConfig[i].checked ) {
+            box.prop( "checked", true );
+         }
+
+         box.appendTo( checkboxContainer );
       }
 
       $( "#selectAll" ).selectAllCheckbox( {
@@ -99,14 +109,14 @@
       var selectAll = $( "#selectAll" );
 
       if( expected === SelectAllState.CHECKED ) {
-         ok( selectAll.is(":checked"), "The select-all checkbox should be CHECKED " + (isInit ? "at initialization" : "after being clicked") );
-         equal( selectAll.prop("indeterminate"), false, "The select-all checkbox should not be indeterminate " + (isInit ? "at initialization" : "after being clicked") );
+         ok( selectAll.is(":checked"), "The select-all checkbox should be CHECKED " + (isInit ? "at initialization" : "") );
+         equal( selectAll.prop("indeterminate"), false, "The select-all checkbox should not be indeterminate " + (isInit ? "at initialization" : "") );
       } else if( expected === SelectAllState.NOT_CHECKED ) {
-         ok( !selectAll.is(":checked"), "The select-all checkbox should be initialized to NOT CHECKED " + (isInit ? "at initialization" : "after being clicked") );
-         equal( selectAll.prop("indeterminate"), false, "The select-all checkbox should not be indeterminate " + (isInit ? "at initialization" : "after being clicked") );
+         notOk( selectAll.is(":checked"), "The select-all checkbox should be NOT CHECKED " + (isInit ? "at initialization" : "") );
+         equal( selectAll.prop("indeterminate"), false, "The select-all checkbox should not be indeterminate " + (isInit ? "at initialization" : "") );
       } else if( expected === SelectAllState.PARTIALLY_CHECKED ) {
-         ok( selectAll.is(":checked"), "The select-all checkbox should be PARTIALLY CHECKED " + (isInit ? "at initialization" : "") );
-         equal( selectAll.prop("indeterminate"), true, "The select-all checkbox should be indeterminate " + (isInit ? "at initialization" : "after being clicked") );
+         notOk( selectAll.is(":checked"), "The select-all checkbox should be NOT CHECKED " + (isInit ? "at initialization" : "") );
+         equal( selectAll.prop("indeterminate"), true, "The select-all checkbox should be indeterminate " + (isInit ? "at initialization" : "") );
       } else {
          throw "Unknown value for expected: " + expected;
       }
@@ -122,7 +132,7 @@
       } );
    }
 
-   QUnit.config.hidepassed = true;
+   QUnit.config.hidepassed = false;
 
    QUnit.cases( testCases ).test( "Test", function(params) {
       initGroup( params.boxes, params.isIndeterminate );

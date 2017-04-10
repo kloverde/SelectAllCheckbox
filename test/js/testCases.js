@@ -70,24 +70,35 @@ var testCases;
    };
 
    testCases = [
+
       tc( "determinate noneDisabled_noneChecked", checkboxGroups["noneDisabled_noneChecked"], false, SelectAllState.NOT_CHECKED,
           [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
             clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
       ),
 
       tc( "indeterminate noneDisabled_noneChecked", checkboxGroups["noneDisabled_noneChecked"], true, SelectAllState.NOT_CHECKED,
-            [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
-              clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
-        )
+          [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
+            clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
+      ),
+
+      tc( "determinate noneDisabled_someChecked", checkboxGroups["noneDisabled_someChecked"], false, SelectAllState.NOT_CHECKED,
+          [ clickScript("0", [0], GroupState.SOME, SelectAllState.NOT_CHECKED,  [true, true, false, true]),
+            clickScript("2", [2], GroupState.ALL,  SelectAllState.CHECKED,      [true, true, true, true]), ]
+     ),
+
+     tc( "indeterminate noneDisabled_someChecked", checkboxGroups["noneDisabled_someChecked"], true, SelectAllState.PARTIALLY_CHECKED,
+         [ clickScript("0", [0], GroupState.SOME,  SelectAllState.PARTIALLY_CHECKED,  [true, true, false, true]),
+           clickScript("2", [2], GroupState.ALL,   SelectAllState.CHECKED,            [true, true, true, true]), ]
+      )
    ];
 
    /**
     * Creates a checkbox template
     */
-   function box( isChecked, isEnabled ) {
+   function box( isEnabled, isChecked) {
       return {
-         checked : isChecked,
-         enabled : isEnabled
+         enabled : isEnabled,
+         checked : isChecked
       };
    }
 
