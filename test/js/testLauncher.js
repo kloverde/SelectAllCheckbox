@@ -97,12 +97,22 @@
    function validateCallback( expectedCallbackChanged, expectedCallbackGroupState ) {
       var expectedCallbackChangedNotJqueryObjects = [];
 
-      for( var i = 0; i < affectedBoxes.length; i++ ) {
-         expectedCallbackChangedNotJqueryObjects.push( parseInt(affectedBoxes[i].prop("id").replace("box", "")) );
+      if( expectedCallbackChanged == null || expectedCallbackChanged.length === 0 ) {
+         equal( affectedBoxes, null, "Expecting nothing to change, so the callback should not fire (affected boxes)" );
+      } else {
+         for( var i = 0; i < affectedBoxes.length; i++ ) {
+            expectedCallbackChangedNotJqueryObjects.push( parseInt(affectedBoxes[i].prop("id").replace("box", "")) );
+         }
+
+         equal( (affectedBoxes == null ? 0 : affectedBoxes.length), (expectedCallbackChanged == null ? 0 : expectedCallbackChanged.length), "The number of expected vs. affected boxes must be the same" );
+         deepEqual( expectedCallbackChangedNotJqueryObjects, expectedCallbackChanged, "The affected boxes reported by the callback are " + expectedCallbackChanged );
       }
 
-      deepEqual( expectedCallbackChangedNotJqueryObjects, expectedCallbackChanged, "The affected boxes reported by the callback are " + expectedCallbackChanged );
-      equal( groupState, expectedCallbackGroupState, "The group state reported by the callback is '" + expectedCallbackGroupState + "'" );
+      if( expectedCallbackGroupState == null ) {
+         equal( groupState, null, "Expecting nothing to change, so the callback should not fire (checkbox group state)" );
+      } else {
+         equal( groupState, expectedCallbackGroupState, "The group state reported by the callback is '" + expectedCallbackGroupState + "'" );
+      }
    }
 
    function validateSelectAll( expected, isInit ) {
@@ -138,20 +148,22 @@
       initGroup( params.boxes, params.isIndeterminate );
       validateSelectAll( params.expectedSelectAllOnInit, true );
 
-      for( var i = 0; i < params.clickScript.length; i++ ) {
-         var click = params.clickScript[i];
+      if( params.clickScript != undefined && params.clickScript != null ) {
+         for( var i = 0; i < params.clickScript.length; i++ ) {
+            var click = params.clickScript[i];
 
-         resetCallback();
+            resetCallback();
 
-         if( isNaN(click.whichBox ) ) {
-            $( "#" + click.whichBox ).click();
-         } else {
-            $( "#box" + click.whichBox ).click();
+            if( isNaN(click.whichBox ) ) {
+               $( "#" + click.whichBox ).click();
+            } else {
+               $( "#box" + click.whichBox ).click();
+            }
+
+            validateCallback( click.expectedCallbackChanged, click.expectedCallbackGroupState );
+            validateSelectAll( click.expectedSelectAllState, false );
+            validateBoxStates( click.expectedBoxStates );
          }
-
-         validateCallback( click.expectedCallbackChanged, click.expectedCallbackGroupState );
-         validateSelectAll( click.expectedSelectAllState, false );
-         validateBoxStates( click.expectedBoxStates );
       }
    } );
 
