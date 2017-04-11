@@ -153,6 +153,8 @@ var testCases;
       )
    ];
 
+   validateTestCases();
+
    /**
     * Creates a checkbox template
     */
@@ -217,22 +219,22 @@ var testCases;
          expectedBoxStates : expectedBoxStates
       };
    }
-} )();
 
-function validateTestCases( tests ) {
-   // Check the test cases for duplicate test names
+   function validateTestCases() {
+      // Check the test cases for duplicate test names
 
-   for( var i = 0; i < tests.length; i++ ) {
-      var name = tests[i].title;
+      for( var i = 0; i < testCases.length; i++ ) {
+         var name = testCases[i].title;
 
-      for( var j = i + 1; j < tests.length; j++ ) {
-         var name2 = tests[j].title;
+         for( var j = i + 1; j < testCases.length; j++ ) {
+            var name2 = testCases[j].title;
 
-         if( name.toLowerCase() === name2.toLowerCase() ) {
-            throw "Duplicate test name (case-insensitive): " + name;
+            if( name.toLowerCase() === name2.toLowerCase() ) {
+               throw "Duplicate test name (case-insensitive): " + name;
+            }
          }
       }
-   }
 
-   return true;
-}
+      return true;
+   }
+} )();
