@@ -1,4 +1,4 @@
-# Release 2.1 (UPCOMING RELEASe)
+# Release 2.1 (UPCOMING RELEASE)
 
 * The select-all checkbox no longer changes the state of disabled checkboxes
 

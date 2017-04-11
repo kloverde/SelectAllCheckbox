@@ -45,7 +45,7 @@
          // checkboxes as jQuery objects.  The second argument is a string representing
          // the checked state of the checkbox group:  possible values are "none", "some"
          // and "all".
-         onChangeCallback : null,
+         onChangeCallback : undefined,
 
          // Controls whether the select-all checkbox displays as partially checked when a
          // subset of checkboxes are checked
