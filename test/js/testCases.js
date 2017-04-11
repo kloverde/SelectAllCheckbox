@@ -73,13 +73,15 @@ var testCases;
       //--------------------
 
       tc( "determinate noneDisabled_noneChecked", checkboxGroups["noneDisabled_noneChecked"], false, SelectAllState.NOT_CHECKED,
-          [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
-            clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
+          [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true,  true,  true,  true]),
+            clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]),
+            clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true,  true,  true,  true]) ]
       ),
 
       tc( "indeterminate noneDisabled_noneChecked", checkboxGroups["noneDisabled_noneChecked"], true, SelectAllState.NOT_CHECKED,
-          [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true, true, true, true]),
-            clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]) ]
+          [ clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true,  true,  true,  true]),
+            clickScript("selectAll", [0, 1, 2, 3], GroupState.NONE, SelectAllState.NOT_CHECKED, [false, false, false, false]),
+            clickScript("selectAll", [0, 1, 2, 3], GroupState.ALL,  SelectAllState.CHECKED,     [true,  true,  true,  true]) ]
       ),
 
       //--------------------
@@ -118,9 +120,37 @@ var testCases;
           [ clickScript("2",         null,      null,             SelectAllState.NOT_CHECKED,        [false, false, false, false]),
             clickScript("selectAll", [0, 1, 3], GroupState.SOME,  SelectAllState.PARTIALLY_CHECKED,  [true, true, false, true]),
             clickScript("selectAll", [0, 1, 3], GroupState.NONE,  SelectAllState.NOT_CHECKED,        [false, false, false, false]) ]
-      )
+      ),
 
       //--------------------
+
+      tc( "determinate hasDisabled_someEnabledChecked", checkboxGroups["hasDisabled_someEnabledChecked"], false, SelectAllState.NOT_CHECKED,
+          [ clickScript("2",         null,      null,             SelectAllState.NOT_CHECKED,  [false, false, false, true]),
+            clickScript("selectAll", [0, 1],    GroupState.SOME,  SelectAllState.NOT_CHECKED,  [true,  true,  false, true]),
+            clickScript("0",         [0],       GroupState.SOME,  SelectAllState.NOT_CHECKED,  [false, true,  false, true]),
+            clickScript("selectAll", [0],       GroupState.SOME,  SelectAllState.NOT_CHECKED,  [true,  true,  false, true]),
+            clickScript("selectAll", [0, 1, 3], GroupState.NONE,  SelectAllState.NOT_CHECKED,  [false, false, false, false]) ]
+      ),
+
+      tc( "indeterminate hasDisabled_someEnabledChecked", checkboxGroups["hasDisabled_someEnabledChecked"], true, SelectAllState.PARTIALLY_CHECKED,
+            [ clickScript("2",         null,      null,             SelectAllState.PARTIALLY_CHECKED,  [false, false, false, true]),
+              clickScript("selectAll", [0, 1],    GroupState.SOME,  SelectAllState.PARTIALLY_CHECKED,  [true,  true,  false, true]),
+              clickScript("0",         [0],       GroupState.SOME,  SelectAllState.PARTIALLY_CHECKED,  [false, true,  false, true]),
+              clickScript("selectAll", [0],       GroupState.SOME,  SelectAllState.PARTIALLY_CHECKED,  [true,  true,  false, true]),
+              clickScript("selectAll", [0, 1, 3], GroupState.NONE,  SelectAllState.NOT_CHECKED,        [false, false, false, false]) ]
+      ),
+
+      //--------------------
+
+      tc( "determinate hasDisabled_someEnabledAndDisabledChecked", checkboxGroups["hasDisabled_someEnabledAndDisabledChecked"], false, SelectAllState.NOT_CHECKED,
+          [ clickScript("selectAll", [0, 1],    GroupState.ALL,  SelectAllState.CHECKED,      [true,  true,  true, true]),
+            clickScript("selectAll", [0, 1, 3], GroupState.SOME, SelectAllState.NOT_CHECKED,  [false, false, true, false]) ]
+      ),
+
+      tc( "indeterminate hasDisabled_someEnabledAndDisabledChecked", checkboxGroups["hasDisabled_someEnabledAndDisabledChecked"], true, SelectAllState.PARTIALLY_CHECKED,
+          [ clickScript("selectAll", [0, 1],    GroupState.ALL,  SelectAllState.CHECKED,            [true,  true,  true, true]),
+            clickScript("selectAll", [0, 1, 3], GroupState.SOME, SelectAllState.PARTIALLY_CHECKED,  [false, false, true, false]) ]
+      )
    ];
 
    /**
