@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+   <head>
+      <meta charset="UTF-8"/>
+
+      <!--
+         SelectAllCheckbox
+         https://www.github.com/kloverde/jquery-SelectAllCheckbox
+
+         Donations:  https://paypal.me/KurtisLoVerde/5
+
+         Copyright (c) 2016, Kurtis LoVerde
+         All rights reserved.
+
+         Redistribution and use in source and binary forms, with or without
+         modification, are permitted provided that the following conditions are met:
+
+             1. Redistributions of source code must retain the above copyright
+                notice, this list of conditions and the following disclaimer.
+             2. Redistributions in binary form must reproduce the above copyright
+                notice, this list of conditions and the following disclaimer in the
+                documentation and/or other materials provided with the distribution.
+             3. Neither the name of the copyright holder nor the names of its
+                contributors may be used to endorse or promote products derived from
+                this software without specific prior written permission.
+
+         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+         ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+         WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+         DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+         FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+         DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+         SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+         CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+         OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+         OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      -->
+
+      <title>SelectAllCheckbox Demo</title>
+
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+      <script type="text/javascript" src="../src/jquery.selectallcheckbox.js"></script>
+
+      <script type="text/javascript">
+         function onChange( checkboxes, checkedState ) {
+            var html = "<p>Changed:<br/>";
+
+            for( var i = 0; i < checkboxes.length; i++ ) {
+               var box = checkboxes[i];
+               var line = box.attr( "id" ) + " : " + ( box.prop("checked") ? "checked" : "unchecked" ) + "<br/>";
+
+               html += line;
+            }
+
+            html += ("</p><p>Checked state of group is: " + checkedState + "</p>");
+
+            $( "#log" ).html( html );
+         }
+
+         $( document ).ready( function() {
+            $( "#selectAllGroup1" ).selectAllCheckbox( {
+               checkboxesName   : "group1",
+               onChangeCallback : onChange
+            } );
+
+            $( "#selectAllGroup2" ).selectAllCheckbox( {
+               checkboxesName   : "group2",
+               onChangeCallback : onChange,
+               useIndeterminate : false
+            } );
+
+            $( "#selectAllGroup3" ).selectAllCheckbox( {
+                checkboxesName   : "group3",
+                onChangeCallback : onChange
+            } );
+
+            $( "#btnChangeByScript" ).click( function() {
+               var selector = "#group3_a";
+
+               $( selector ).prop( "checked", !$(selector).prop("checked") );
+               $( selector ).trigger( "change" );
+            } );
+
+            $( "#selectAllGroup4" ).selectAllCheckbox( {
+                checkboxesName   : "group4",
+                onChangeCallback : onChange
+            } );
+         } );
+      </script>
+
+      <style type="text/css">
+         html, body { padding-top: 0; margin-top: 0; }
+
+         label {
+            display: block;
+         }
+
+         .selectAllLabel {
+            font-size: larger;
+            font-weight: bold;
+         }
+
+         #container {
+            width: 400px;
+         }
+
+         #container, #checkboxes, #log {
+            display: table-cell;
+            min-width: 350px;
+            vertical-align: middle;
+            padding: 10px;
+         }
+
+         #checkboxes, #log {
+            border: 1px solid #000000;
+         }
+
+         #log {
+            position : fixed;
+            top: 10px;
+            left: 430px;
+            height: 150px;
+         }
+      </style>
+   </head>
+
+   <body>
+      <div id="container">
+         <div id="checkboxes">
+            <h3>Group 1 (indeterminate)</h3>
+
+            <label class="selectAllLabel">
+               <input type="checkbox" id="selectAllGroup1"/>
+               Select All
+            </label>
+
+            <label>
+               <input type="checkbox" id="group1_a" name="group1" value="1a"/>
+               Choice A
+            </label>
+
+            <label>
+               <input type="checkbox" id="group1_b" name="group1" value="1b"/>
+               Choice B
+            </label>
+
+            <label>
+               <input type="checkbox" id="group1_c" name="group1" value="1c"/>
+               Choice C
+            </label>
+
+            <h3>Group 2 (<em>de</em>terminate)</h3>
+
+            <label class="selectAllLabel">
+               <input type="checkbox" id="selectAllGroup2"/>
+               Select All
+            </label>
+
+            <label>
+               <input type="checkbox" id="group2_a" name="group2" value="2a"/>
+               Choice A
+            </label>
+
+            <label>
+               <input type="checkbox" id="group2_b" name="group2" value="2b"/>
+               Choice B
+            </label>
+
+            <label>
+               <input type="checkbox" id="group2_c" name="group2" value="2c"/>
+               Choice C
+            </label>
+
+            <h3>Group 3 (change by script)</h3>
+
+            <label class="selectAllLabel">
+               <input type="checkbox" id="selectAllGroup3"/>
+               Select All
+            </label>
+
+            <label>
+               <input type="checkbox" id="group3_a" name="group3" value="3a"/>
+               Choice A
+            </label>
+
+            <label>
+               <input type="checkbox" id="group3_b" name="group3" value="3b"/>
+               Choice B
+            </label>
+
+            <label>
+               <input type="checkbox" id="group3_c" name="group3" value="3c"/>
+               Choice C
+            </label>
+
+            <input type="button" id="btnChangeByScript" value="Change 'Choice A' box by script"/>
+
+            <h3>Group 4 (disabled checkboxes)</h3>
+
+            <p>
+               The state of disabled checkboxes are unaffected by the select-all checkbox.
+               Their default states, whether checked or unchecked, remain - and they
+               contribute to the status of the overall checkbox group.  Note that the
+               select-all checkbox never displays as unchecked - it's either checked or
+               indeterminate.  This is because there is a disabled, checked checkbox.
+            </p>
+
+            <label class="selectAllLabel">
+               <input type="checkbox" id="selectAllGroup4"/>
+               Select All
+            </label>
+
+            <label>
+               <input type="checkbox" id="group4_a" name="group4" value="4a" checked="checked" disabled/>
+               Choice A
+            </label>
+
+            <label>
+               <input type="checkbox" id="group4_b" name="group4" value="4b" disabled/>
+               Choice B
+            </label>
+
+            <label>
+               <input type="checkbox" id="group4_c" name="group4" value="4c"/>
+               Choice C
+            </label>
+
+            <label>
+               <input type="checkbox" id="group4_d" name="group4" value="4d"/>
+               Choice D
+            </label>
+         </div>
+      </div>
+
+      <div id="log">
+         Interact with the demo.  Callback updates will appear here.
+      </div>
+
+      <h2>Donations</h2>
+      <p><a href="https://paypal.me/KurtisLoVerde/5" target="new">https://paypal.me/KurtisLoVerde/5</a></p>
+      <p>Thank you for your support!</p>
+   </body>
+</html>

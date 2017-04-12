@@ -1,5 +1,5 @@
 /*
- * SelectAllCheckbox v2.0.1
+ * SelectAllCheckbox v3.0
  * https://www.github.com/kloverde/jquery-SelectAllCheckbox
  *
  * Donations:  https://paypal.me/KurtisLoVerde/5
@@ -36,7 +36,7 @@
 
    $.fn.selectAllCheckbox = function( options ) {
 
-	   var settings = $.extend( {
+      var settings = $.extend( {
          // The HTML "name" attribute of the checkbox group
          checkboxesName : "checkboxes",
 
@@ -45,7 +45,7 @@
          // checkboxes as jQuery objects.  The second argument is a string representing
          // the checked state of the checkbox group:  possible values are "none", "some"
          // and "all".
-         onChangeCallback : null,
+         onChangeCallback : undefined,
 
          // Controls whether the select-all checkbox displays as partially checked when a
          // subset of checkboxes are checked
@@ -57,50 +57,72 @@
           GROUP_STATE_ALL  = "all";
 
       var CHECKBOX_GROUP_SELECTOR = "input[type='checkbox'][name='" + settings.checkboxesName + "']";
-      var PROP_CHECKED = "checked";
 
-      var allBox = this;
+      var selectAll = this;
 
-      // The select-all checkbox's change handler:
-      // Selects or deselects all checkboxes and invokes the user-supplied callback.
-      // If you set a checkbox's state via script, you must trigger change() on the
-      // modified checkbox to ensure the select-all checkbox's state is updated.
-      // JQuery does not fire change() for you.
-      allBox.change( function() {
-         var isAllChecked = allBox.prop( PROP_CHECKED );
-         var changedBoxes = [];
+      setSelectAllCheckboxInitialState();
 
-         $( CHECKBOX_GROUP_SELECTOR ).each( function() {
-            var jqueryThis = $( this );
-            var isThisChecked = jqueryThis.prop( PROP_CHECKED );
+      // The select-all event listener uses 'click' instead of 'change' as a workaround to
+      // a known IE issue, where indeterminate checkboxes don't fire the 'change' event.
 
-            if( isThisChecked !== isAllChecked ) {
-               jqueryThis.prop( PROP_CHECKED, isAllChecked );
-               changedBoxes.push( jqueryThis );
+      selectAll.click( function() {
+         var allCheckboxes = $( CHECKBOX_GROUP_SELECTOR );
+         var enabledCheckboxes = allCheckboxes.filter( ":enabled" );
+         var eligibleForChecking = enabledCheckboxes.filter( ":not(:checked)" );
+
+         var newCheckedProp = eligibleForChecking.length > 0;
+         var changedBoxes = [];  // Passed to the callback
+
+         enabledCheckboxes.each( function() {
+            var jqThis = $( this );
+
+            if( jqThis.prop("checked") !== newCheckedProp ) {
+               jqThis.prop( "checked", newCheckedProp );
+               changedBoxes.push( jqThis );
             }
          } );
 
+         var howManyChecked = 0;
+
+         allCheckboxes.each( function() {
+            if( $(this).is(":checked") ) {
+               howManyChecked++;
+            }
+         } );
+
+         if( howManyChecked === 0 ) {
+            status = GROUP_STATE_NONE;
+         } else if( howManyChecked < allCheckboxes.length ) {
+            status = GROUP_STATE_SOME;
+         } else if( howManyChecked === allCheckboxes.length ) {
+            status = GROUP_STATE_ALL;
+         } else {
+            throw "Impossible result:  more checkboxes checked than actually exist";
+         }
+
+         updateSelectAllCheckboxState( status );
+
          if( changedBoxes.length > 0 && typeof settings.onChangeCallback === "function" ) {
-            settings.onChangeCallback( changedBoxes, isAllChecked ? GROUP_STATE_ALL : GROUP_STATE_NONE );
+            settings.onChangeCallback( changedBoxes, status );
          }
       } );
 
       $( CHECKBOX_GROUP_SELECTOR ).each( function() {
          var box = $( this );
 
-         // The checkbox change handler:
-         // Updates the select-all checkbox's state and invokes the user-supplied callback.
-         // If you set a checkbox's state via script, you must trigger change() on the
-         // modified checkbox to ensure the select-all checkbox's state is updated.
-         // JQuery does not fire change() for you.
+         // Updates the select-all checkbox's state and invokes the user-supplied callback.  If you set a checkbox's state
+         // via script, you must trigger change() on the modified checkbox to ensure the select-all checkbox's state is
+         // updated.  JQuery does not fire change() for you.  The select-all checkbox is different:  it responds to the
+         // click event instead of the change event because IE doesn't fire the change event for indeterminate checkboxes.
+
          box.change( function() {
-            var someChecked    = false,
+            var someChecked = false,
                 someNotChecked = false;
 
             var status = GROUP_STATE_NONE;
 
             $( CHECKBOX_GROUP_SELECTOR ).each( function() {
-               if( $(this).prop(PROP_CHECKED) === true ) {
+               if( $(this).prop("checked") === true ) {
                   someChecked = true;
                } else {
                   someNotChecked = true;
@@ -124,26 +146,49 @@
          } );
       } );
 
-      // Sets the select-all checkbox to checked, unchecked or partially checked.
-      // If you set a checkbox's state via script, you must trigger change() on the
-      // modified checkbox to ensure the select-all checkbox's state is updated.
-      // JQuery does not fire change() for you.
+      function setSelectAllCheckboxInitialState() {
+         var checkboxes = $( CHECKBOX_GROUP_SELECTOR );
+         var checkedCount = 0;
+         var state = null;
+
+         checkboxes.each( function() {
+            var jqThis = $( this );
+
+            if( jqThis.prop("checked") === true ) {
+               checkedCount++;
+            };
+
+            if( checkedCount === 0 ) {
+               state = GROUP_STATE_NONE;
+            } else if( checkedCount < checkboxes.length ) {
+               state = GROUP_STATE_SOME;
+            } else if( checkedCount === checkboxes.length ) {
+               state = GROUP_STATE_ALL;
+            } else {
+               throw "Impossible result:  more checkboxes checked than actually exist";
+            }
+
+            updateSelectAllCheckboxState( state );
+         } );
+      }
+
+      // Sets the select-all checkbox to checked, unchecked or partially checked
       function updateSelectAllCheckboxState( status ) {
          if( status === "some" ) {
-            allBox.prop( PROP_CHECKED, false );
+            selectAll.prop( "checked", false );
 
             if( settings.useIndeterminate ) {
-               allBox.prop( "indeterminate", true );
+               selectAll.prop( "indeterminate", true );
             }
          } else if( status === "all" ) {
-            allBox.prop( "indeterminate", false );
-            allBox.prop( PROP_CHECKED, true );
+            selectAll.prop( "indeterminate", false );
+            selectAll.prop( "checked", true );
          } else if( status === "none" ) {
-            allBox.prop( "indeterminate", false );
-            allBox.prop( PROP_CHECKED, false );
+            selectAll.prop( "indeterminate", false );
+            selectAll.prop( "checked", false );
          }
       }
 
-      return allBox;
+      return selectAll;
    };
 }( jQuery ));
