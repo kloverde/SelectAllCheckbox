@@ -1,7 +1,5 @@
-SelectAllCheckbox v2.1 (UPCOMING RELEASE)
+SelectAllCheckbox v3.0
 ======================
-
-# You've stumbled upon a development branch.  Have a look around if you'd like, but only use code that has been posted to the releases page.
 
 See LICENSE for this software's licensing terms.
 
@@ -16,7 +14,7 @@ SelectAllCheckbox is a jQuery plugin which makes it easy to create "select all" 
 * Supports any number of checkbox groups
 * Configuration accepts a callback which executes when one or more checkboxes changes state
 * The callback receives the changed checkbox(es) as an array of jQuery objects, plus the status of the checkbox group (all/some/none checked)
-* [NEW!] Select-all checkboxes do not modify the state of disabled checkboxes
+* Select-all checkboxes do not modify the state of disabled checkboxes
 
 
 ## Using

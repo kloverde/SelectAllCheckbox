@@ -104,8 +104,9 @@ var testCases;
       ),
 
       tc( "indeterminate noneDisabled_allChecked", checkboxGroups["noneDisabled_allChecked"], true, SelectAllState.CHECKED,
-            [ clickScript("3",         [3], GroupState.SOME,  SelectAllState.PARTIALLY_CHECKED,  [true, true, true, false]),
-              clickScript("selectAll", [3], GroupState.ALL,   SelectAllState.CHECKED,            [true, true, true, true]) ]
+           [ clickScript("3",         [3],           GroupState.SOME,  SelectAllState.PARTIALLY_CHECKED,  [true,  true,  true,  false]),
+             clickScript("selectAll", [3],           GroupState.ALL,   SelectAllState.CHECKED,            [true,  true,  true,  true]),
+             clickScript("selectAll", [0, 1, 2, 3],  GroupState.NONE,  SelectAllState.NOT_CHECKED,        [false, false, false, false]) ]
       ),
 
       //--------------------

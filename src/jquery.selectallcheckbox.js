@@ -1,5 +1,5 @@
 /*
- * SelectAllCheckbox v2.1
+ * SelectAllCheckbox v3.0
  * https://www.github.com/kloverde/jquery-SelectAllCheckbox
  *
  * Donations:  https://paypal.me/KurtisLoVerde/5
@@ -62,12 +62,10 @@
 
       setSelectAllCheckboxInitialState();
 
-      // The select-all checkbox's change handler:
-      // Selects or deselects all checkboxes and invokes the user-supplied callback.
-      // If you set a checkbox's state via script, you must trigger change() on the
-      // modified checkbox to ensure the select-all checkbox's state is updated.
-      // JQuery does not fire change() for you.
-      selectAll.change( function() {
+      // The select-all event listener uses 'click' instead of 'change' as a workaround to
+      // a known IE issue, where indeterminate checkboxes don't fire the 'change' event.
+
+      selectAll.click( function() {
          var allCheckboxes = $( CHECKBOX_GROUP_SELECTOR );
          var enabledCheckboxes = allCheckboxes.filter( ":enabled" );
          var eligibleForChecking = enabledCheckboxes.filter( ":not(:checked)" );
@@ -112,11 +110,11 @@
       $( CHECKBOX_GROUP_SELECTOR ).each( function() {
          var box = $( this );
 
-         // The checkbox change handler:
-         // Updates the select-all checkbox's state and invokes the user-supplied callback.
-         // If you set a checkbox's state via script, you must trigger change() on the
-         // modified checkbox to ensure the select-all checkbox's state is updated.
-         // JQuery does not fire change() for you.
+         // Updates the select-all checkbox's state and invokes the user-supplied callback.  If you set a checkbox's state
+         // via script, you must trigger change() on the modified checkbox to ensure the select-all checkbox's state is
+         // updated.  JQuery does not fire change() for you.  The select-all checkbox is different:  it responds to the
+         // click event instead of the change event because IE doesn't fire the change event for indeterminate checkboxes.
+
          box.change( function() {
             var someChecked = false,
                 someNotChecked = false;
