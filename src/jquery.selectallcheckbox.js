@@ -1,5 +1,5 @@
 /*
- * SelectAllCheckbox v3.0
+ * SelectAllCheckbox v3.0.1
  * https://www.github.com/kloverde/jquery-SelectAllCheckbox
  *
  * Donations:  https://paypal.me/KurtisLoVerde/5
@@ -73,6 +73,9 @@
          var newCheckedProp = eligibleForChecking.length > 0;
          var changedBoxes = [];  // Passed to the callback
 
+         var howManyChecked = 0;
+         var status;
+
          enabledCheckboxes.each( function() {
             var jqThis = $( this );
 
@@ -81,8 +84,6 @@
                changedBoxes.push( jqThis );
             }
          } );
-
-         var howManyChecked = 0;
 
          allCheckboxes.each( function() {
             if( $(this).is(":checked") ) {
@@ -156,7 +157,7 @@
 
             if( jqThis.prop("checked") === true ) {
                checkedCount++;
-            };
+            }
 
             if( checkedCount === 0 ) {
                state = GROUP_STATE_NONE;
@@ -174,16 +175,16 @@
 
       // Sets the select-all checkbox to checked, unchecked or partially checked
       function updateSelectAllCheckboxState( status ) {
-         if( status === "some" ) {
+         if( status === GROUP_STATE_SOME ) {
             selectAll.prop( "checked", false );
 
             if( settings.useIndeterminate ) {
                selectAll.prop( "indeterminate", true );
             }
-         } else if( status === "all" ) {
+         } else if( status === GROUP_STATE_ALL ) {
             selectAll.prop( "indeterminate", false );
             selectAll.prop( "checked", true );
-         } else if( status === "none" ) {
+         } else if( status === GROUP_STATE_NONE ) {
             selectAll.prop( "indeterminate", false );
             selectAll.prop( "checked", false );
          }
