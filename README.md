@@ -1,5 +1,5 @@
-SelectAllCheckbox v3.0
-======================
+SelectAllCheckbox v3.0.1
+========================
 
 See LICENSE for this software's licensing terms.
 
