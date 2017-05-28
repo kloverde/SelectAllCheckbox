@@ -1,3 +1,11 @@
+# Release 3.0.1 (May 28, 2017)
+
+No change to functionality or features in this release
+
+* Added a declaration for an undeclared variable
+* Replaced some strings with constants
+
+
 # Release 3.0 (April 11, 2017)
 
 * The select-all checkbox no longer changes the state of disabled checkboxes
